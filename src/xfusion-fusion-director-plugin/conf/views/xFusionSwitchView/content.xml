@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="2b9d1d99-e9a9-4455-a9a9-19c21ca6f4c7">
-            <Title localizationKey="view.title">xFusion Switch Node View</Title>
+            <Title localizationKey="view.title">XFUSION Switch Node View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="switchNode" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="switchNode" type="self"/>

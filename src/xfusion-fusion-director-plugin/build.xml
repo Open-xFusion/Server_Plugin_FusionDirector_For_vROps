@@ -56,6 +56,7 @@
          <entry key="ENTRYCLASS" value="${adapter.entryClass}" />
          <entry key="KINDKEY" value="${adapter.adapterType.key}" />
       </propertyfile>
+      <replaceregexp file="${dirs.compiled}/adapter.properties" match="^#.*\n" replace=""/>
       <copy todir="${dirs.compiled}">
          <fileset dir="${dirs.src}" excludes="**/*.java" />
       </copy>
@@ -117,6 +118,7 @@
          <entry key="Implementation-Version" value="${adapter.implementationVersion}" />
          <entry key="Vcops_Minimum_Version" value="${adapter.minimumProductVersion}" />
       </propertyfile>
+      <replaceregexp file="${dirs.deploy}/${build.directory}/conf/version.txt" match="^#.*\n" replace=""/>
 
    </target>
 

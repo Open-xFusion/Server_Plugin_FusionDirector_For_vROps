@@ -1,5 +1,5 @@
 /*
- * Copyright (c) xFusion Technologies Co., Ltd. 2019-2021. All rights reserved.
+ * Copyright (c) xFusion Digital Technologies Co., Ltd. 2019-2021. All rights reserved.
  */
 
 package com.xfusion.fd.api.wrapper;

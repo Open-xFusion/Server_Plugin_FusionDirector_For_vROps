@@ -1,5 +1,5 @@
 /*
- * Copyright (c) xFusion Technologies Co., Ltd. 2019-2021. All rights reserved.
+ * Copyright (c) xFusion Digital Technologies Co., Ltd. 2019-2021. All rights reserved.
  */
 
 package com.xfusion.adapter;
@@ -220,7 +220,7 @@ public class FusionDirectorAdapter extends AdapterBase {
     private List<ResourceKey> collectResourceData(FusionDirector fusionDirector) {
         logger.error("classify method is:" + fusionDirector.getClassifyMethod());
         List<ResourceKey> allKeysList = new ArrayList<>();
-        // 1.2.1 Fusion Director (server)
+        // 1.2.1 FusionDirector (server)
         fusionDirector.setResourceName("hostInstance");
         Map<String, ResourceKey> nodeResourceKeyMap = new HashMap<>();
         StaticToolkit<String, String> toolkit = new StaticToolkit<>();

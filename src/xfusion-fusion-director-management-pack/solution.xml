@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <solution>
 <managementPack>
-<name>xFusionDirectorManagementPack</name>
-<version>2.0.1</version>
+<name>XFUSIONDirectorManagementPack</name>
+<version>2.0.2</version>
 <minimumProductVersion>8.0.0</minimumProductVersion>
 <localizations lang="en">
 <localization lang="en">
-<displayName>xFusion FusionDirector Management Pack</displayName>
-<description>xFusion FusionDirector Management Pack for VMware vRealize Operations</description>
-<vendor>xFusion</vendor>
+<displayName>XFUSION FusionDirector Management Pack</displayName>
+<description>XFUSION FusionDirector Management Pack for VMware vRealize Operations</description>
+<vendor>XFUSION</vendor>
 </localization>
 <localization lang="en-US">
-<displayName>xFusion Fusion Director Management Pack for VMware vRealize Operations</displayName>
-<description>xFusion Fusion Director Management Pack</description>
-<vendor>xFusion</vendor>
+<displayName>XFUSION FusionDirector Management Pack for VMware vRealize Operations</displayName>
+<description>XFUSION FusionDirector Management Pack</description>
+<vendor>XFUSION</vendor>
 </localization>
 </localizations>
 <eula>eula.txt</eula>

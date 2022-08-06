@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="a308adb9-b02c-4a72-bae3-55d0756341ff">
-            <Title localizationKey="view.title">xFusion Raid Card View</Title>
+            <Title localizationKey="view.title">XFUSION Raid Card View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="raidCard" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="raidCard" type="self"/>

@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="ffb971bc-1403-4fc4-8119-c2aa2bf0eae0">
-            <Title localizationKey="view.title">xFusion Memory View</Title>
+            <Title localizationKey="view.title">XFUSION Memory View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="memory" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="memory" type="self"/>

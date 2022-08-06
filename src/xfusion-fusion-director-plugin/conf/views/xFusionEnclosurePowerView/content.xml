@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="ecf42881-44ec-4eb1-a083-8168c5462c4f">
-            <Title localizationKey="view.title">xFusion Enclosure Power View</Title>
+            <Title localizationKey="view.title">XFUSION Enclosure Power View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="enclosurePower" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="enclosurePower" type="self"/>

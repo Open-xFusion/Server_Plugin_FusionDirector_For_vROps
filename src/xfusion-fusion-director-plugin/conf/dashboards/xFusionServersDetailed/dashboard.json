@@ -13,8 +13,8 @@
       "importComplete": true,
       "isDefault": false,
       "locked": false,
-      "name": "xFusion Fusion Director Dashboards/xFusion Server Detailed Dashboard",
-      "namePath": "xFusion Fusion Director Dashboards",
+      "name": "XFUSION FusionDirector Dashboards/XFUSION Server Detailed Dashboard",
+      "namePath": "XFUSION FusionDirector Dashboards",
       "rank": 2,
       "shared": true,
       "temporary": false,
@@ -100,7 +100,7 @@
                "relationshipMode": 0,
                "resInteractionMode": null,
                "selfProvider": {"selfProvider": false},
-               "title": "xFusion Server Metric Chart"
+               "title": "XFUSION Server Metric Chart"
             },
             "gridsterCoords": {
                "h": 5,
@@ -132,7 +132,7 @@
                   "value": "b%3A0"
                }
             ],
-            "title": "xFusion Server Metric Chart",
+            "title": "XFUSION Server Metric Chart",
             "type": "MetricChart"
          },
          {
@@ -192,7 +192,7 @@
                      "tier": []
                   }
                },
-               "title": "xFusion Server List"
+               "title": "XFUSION Server List"
             },
             "gridsterCoords": {
                "h": 5,
@@ -212,7 +212,7 @@
                   "value": "b%3A1"
                }
             ],
-            "title": "xFusion Server List",
+            "title": "XFUSION Server List",
             "type": "ResourceList"
          }
       ]

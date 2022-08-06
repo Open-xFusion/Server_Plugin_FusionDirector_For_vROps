@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="35feb887-0390-4e12-bbb8-17980c13ad87">
-            <Title localizationKey="view.title">xFusion Drive View</Title>
+            <Title localizationKey="view.title">XFUSION Drive View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="drive" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="drive" type="self"/>
