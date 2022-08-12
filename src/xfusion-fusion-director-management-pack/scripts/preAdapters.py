@@ -1,3 +1,6 @@
 #!/usr/bin/env python
+import logging
 
-print("In Pre")
+logging.basicConfig(level=logging.INFO)
+
+logging.info("In Pre")

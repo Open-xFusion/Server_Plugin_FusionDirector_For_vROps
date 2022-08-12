@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="22f97c21-e1de-40e2-a5d3-414b4e1eb661">
-            <Title localizationKey="view.title">xFusion Group View</Title>
+            <Title localizationKey="view.title">XFUSION Group View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="group" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="group" type="self"/>

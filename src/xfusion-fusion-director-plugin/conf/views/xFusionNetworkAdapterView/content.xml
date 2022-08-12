@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="93cc52db-9cd5-4ce0-a343-6b1cf3247317">
-            <Title localizationKey="view.title">xFusion Network Adapter View</Title>
+            <Title localizationKey="view.title">XFUSION Network Adapter View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="networkAdapter" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="networkAdapter" type="self"/>

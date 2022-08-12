@@ -2,7 +2,7 @@
 <Content>
 	<Views>
 		<ViewDef id="2e312720-ce09-4134-b335-bd8c5f0c85b2">
-			<Title localizationKey="view.title">xFusion Processor View</Title>
+			<Title localizationKey="view.title">XFUSION Processor View</Title>
 			<Description localizationKey="view.desc" />
 			<SubjectType adapterKind="FusionDirectorAdapter"
 				resourceKind="processor" type="descendant" />

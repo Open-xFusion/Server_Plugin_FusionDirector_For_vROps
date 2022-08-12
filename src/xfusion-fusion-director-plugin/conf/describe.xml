@@ -775,7 +775,7 @@
     <TraversalSpecKinds>
 
         <!-- node tree definition -->
-        <TraversalSpecKind description="xFusion Servers" iconName="serverRoot.png" name="xFusion Servers" nameKey="300"
+        <TraversalSpecKind description="XFUSION Servers" iconName="serverRoot.png" name="XFUSION Servers" nameKey="300"
                            rootAdapterKind="FusionDirectorAdapter" rootResourceKind="hostInstance" usedFor="ALL">
             <ResourcePath
                     path="FusionDirectorAdapter::hostInstance||FusionDirectorAdapter::classifyGroup||FusionDirectorAdapter::node||FusionDirectorAdapter::processorGroup||FusionDirectorAdapter::processor::child"/>
@@ -796,7 +796,7 @@
         </TraversalSpecKind>
 
         <!-- enclosure tree definition -->
-        <TraversalSpecKind description="xFusion Enclosures" iconName="enclosureRoot.png" name="xFusion Enclosures"
+        <TraversalSpecKind description="XFUSION Enclosures" iconName="enclosureRoot.png" name="XFUSION Enclosures"
                            nameKey="301" rootAdapterKind="FusionDirectorAdapter" rootResourceKind="enclosureInstance"
                            usedFor="ALL">
             <!--

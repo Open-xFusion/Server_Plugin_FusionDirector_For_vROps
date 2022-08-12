@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="ecb8b2a1-af87-4762-b61d-c8cb4224edf2">
-            <Title localizationKey="view.title">xFusion PCIe View</Title>
+            <Title localizationKey="view.title">XFUSION PCIe View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="pcie" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="pcie" type="self"/>

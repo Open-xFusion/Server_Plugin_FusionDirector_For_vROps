@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="2c633eab-b59f-4b97-8bcf-57761713114c">
-            <Title localizationKey="view.title">xFusion Power View</Title>
+            <Title localizationKey="view.title">XFUSION Power View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="power" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="power" type="self"/>

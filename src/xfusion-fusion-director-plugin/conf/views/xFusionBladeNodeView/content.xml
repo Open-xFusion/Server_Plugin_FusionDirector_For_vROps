@@ -2,7 +2,7 @@
 <Content>
     <Views>
         <ViewDef id="359b7db3-c9e5-4bfb-9fe1-b9bbdceb8ffc">
-            <Title localizationKey="view.title">xFusion Blade Node View</Title>
+            <Title localizationKey="view.title">XFUSION Blade Node View</Title>
             <Description localizationKey="view.desc"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="bladeNode" type="descendant"/>
             <SubjectType adapterKind="FusionDirectorAdapter" resourceKind="bladeNode" type="self"/>

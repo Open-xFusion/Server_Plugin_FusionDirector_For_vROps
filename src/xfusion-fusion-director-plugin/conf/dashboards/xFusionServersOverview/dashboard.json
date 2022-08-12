@@ -13,8 +13,8 @@
       "importComplete": true,
       "isDefault": false,
       "locked": false,
-      "name": "xFusion Fusion Director Dashboards/xFusion Servers Overview Dashboard",
-      "namePath": "xFusion Fusion Director Dashboards",
+      "name": "XFUSION FusionDirector Dashboards/XFUSION Servers Overview Dashboard",
+      "namePath": "XFUSION FusionDirector Dashboards",
       "rank": 1,
       "shared": true,
       "temporary": false,
@@ -105,7 +105,7 @@
                "refreshContent": {"refreshContent": true},
                "refreshInterval": 30,
                "selfProvider": {"selfProvider": false},
-               "title": "xFusion Servers Top Alerts",
+               "title": "XFUSION Servers Top Alerts",
                "topIssuesDisplayLimit": 15,
                "triggeredObject": {"triggeredObject": "selfChildren"}
             },
@@ -117,7 +117,7 @@
             },
             "height": 242,
             "id": "716bec6d-233a-449b-90dc-200a95145ae5",
-            "title": "xFusion Servers Top Alerts",
+            "title": "XFUSION Servers Top Alerts",
             "type": "ProblemAlertsList"
          },
          {
@@ -350,7 +350,7 @@
                      "id": "004null002021FusionDirectorAdapterhostInstance",
                      "parentId": "FusionDirectorAdapter",
                      "parentText": "FusionDirectorAdapter",
-                     "text": "Fusion Director (Server)",
+                     "text": "FusionDirector (Server)",
                      "type": "resourceKind",
                      "typeId": "resourceKind:id:1_::_"
                   },
@@ -376,7 +376,7 @@
                }],
                "refreshContent": {"refreshContent": false},
                "refreshInterval": 300,
-               "title": "xFusion Servers Environment Health",
+               "title": "XFUSION Servers Environment Health",
                "value": 0
             },
             "gridsterCoords": {
@@ -397,7 +397,7 @@
                   "value": "o%3A"
                }
             ],
-            "title": "xFusion Servers Environment Health",
+            "title": "XFUSION Servers Environment Health",
             "type": "Heatmap"
          }
       ]

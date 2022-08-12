@@ -1,18 +1,18 @@
 # xFusion_FusionDirector_For_vROps
 
 **********************************************************************************
-xFusion FusionDirector for vRealize Operations Manager plugin
+XFUSION FusionDirector for vRealize Operations Manager plugin
 **********************************************************************************
 
 I. General Information 
 
     Name:     xFusion_FusionDirector_For_vROps plugin
     Category: Monitoring 
-    version : 2.0.1
+    version : 2.0.2
 
 II. Function Description
     
-    The xFusion_FusionDirector_For_vCenter Plugin is a plug-in integrated in the vROps and used for xFusion Server management. 
+    The xFusion_FusionDirector_For_vCenter Plugin is a plug-in integrated in the vROps and used for XFUSION Server management. 
     It can be used to connect to multiple FusionDirector and view the servers managed by FusionDirector.
     1. Query basic information about servers and chassis components.
     2. Query the warning information about the server and enclosures.
@@ -28,8 +28,8 @@ III. Version notice
 
 IV. Additional Resources
 
-    For more information consult User Guide: https://github.com/Open-xFusion/Server_Plugin_FusionDirector_For_vROps/tree/master/docs
+    For more information consult User Guide: 
 
 V. Open Source Software Notice
 
-    https://github.com/Open-xFusion/Server_Plugin_FusionDirector_For_vROps/tree/master/docs/Open_Source_Software_Notice.doc
+    https://github.com
