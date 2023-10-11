@@ -108,13 +108,13 @@ class StatisticResult {
     private StatisticItem[] cpuUsagePercent;
 
     @JsonProperty(value = "DiskTotalCapacityGB")
-    private String diskTotalCapacity;
+    private StatisticItem[] diskTotalCapacity;
 
     @JsonProperty(value = "DiskUsagePercent")
-    private String diskUsagePercent;
+    private StatisticItem[] diskUsagePercent;
 
     @JsonProperty(value = "DiskUsedCapacityGB")
-    private String diskUsedCapacity;
+    private StatisticItem[] diskUsedCapacity;
 
     @JsonProperty(value = "FanReading")
     private StatisticItem[] fanReading;
@@ -156,27 +156,27 @@ class StatisticResult {
         this.cpuUsagePercent = cpuUsagePercent;
     }
 
-    public String getDiskTotalCapacity() {
+    public StatisticItem[] getDiskTotalCapacity() {
         return diskTotalCapacity;
     }
 
-    public void setDiskTotalCapacity(String diskTotalCapacity) {
+    public void setDiskTotalCapacity(StatisticItem[] diskTotalCapacity) {
         this.diskTotalCapacity = diskTotalCapacity;
     }
 
-    public String getDiskUsagePercent() {
+    public StatisticItem[] getDiskUsagePercent() {
         return diskUsagePercent;
     }
 
-    public void setDiskUsagePercent(String diskUsagePercent) {
+    public void setDiskUsagePercent(StatisticItem[] diskUsagePercent) {
         this.diskUsagePercent = diskUsagePercent;
     }
 
-    public String getDiskUsedCapacity() {
+    public StatisticItem[] getDiskUsedCapacity() {
         return diskUsedCapacity;
     }
 
-    public void setDiskUsedCapacity(String diskUsedCapacity) {
+    public void setDiskUsedCapacity(StatisticItem[] diskUsedCapacity) {
         this.diskUsedCapacity = diskUsedCapacity;
     }
 

@@ -89,10 +89,8 @@ public class NodeCollector implements ResourceCollector<NodeEntity, NodeBean>, R
         } catch (FusionDirectorException e) {
             fusionDirector.isOffLineException(e);
             logger.error(e.getMessage(), e);
-            return;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return;
         }
     }
 
@@ -103,14 +101,13 @@ public class NodeCollector implements ResourceCollector<NodeEntity, NodeBean>, R
         }
 
         for (int i = 0; i < Constant.MAX_COLLECT_THREAD_COUNT; i++) {
-            Thread collectThread = new Thread(this);
-            collectThread.start();
+            this.startCollectThreat(i);
         }
 
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -159,6 +156,11 @@ public class NodeCollector implements ResourceCollector<NodeEntity, NodeBean>, R
             NodeBean nodeBean = getNodeBean(taskNode);
             if (nodeBean == null) {
                 continue;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                logger.error("InterruptedException Exception", e);
             }
             CatalogueEntity catalog = getCatalogueEntity(taskNode, nodeBean);
             setNodeStatisticsData(taskNode, nodeBean);
@@ -263,6 +265,10 @@ public class NodeCollector implements ResourceCollector<NodeEntity, NodeBean>, R
             GroupResourceBean pcieGroup = new GroupResourceBean("pcieGroup", "PCIe Card Group");
             HealthToolkit pcieGroupHealthToolkit = new HealthToolkit();
             for (PCIEEntity entity : pcieListEntity.getMembers()) {
+                if (entity.getName() != null && entity.getName().contains("OCP")) {
+                    // 过滤OCP卡
+                    continue;
+                }
                 AbstractApiWrapper pcieApiWrapper = new PCIEApiWrapper(fusionDirector);
                 pcieApiWrapper.setPathVariable(Arrays.asList(taskNode.getDeviceID(), entity.getDeviceID()));
                 PCIEBean pcieBean = pcieApiWrapper.call(PCIEBean.class);
@@ -346,16 +352,17 @@ public class NodeCollector implements ResourceCollector<NodeEntity, NodeBean>, R
             if (catalog != null) {
                 storageGroup.setHealthStatus(catalog.getStorageHealth());
             }
-
+            if (driveListEntity == null || driveListEntity.getMembers() == null) {
+                nodeBean.addChild(storageGroup);
+                return;
+            }
             for (DriveEntity entity : driveListEntity.getMembers()) {
                 AbstractApiWrapper driveApiWrapper = new DriveApiWrapper(fusionDirector);
                 driveApiWrapper.setPathVariable(Arrays.asList(taskNode.getDeviceID(), entity.getDeviceID()));
                 DriveBean driveBean = driveApiWrapper.call(DriveBean.class);
                 storageGroup.addChild(driveBean);
             }
-
             nodeBean.addChild(storageGroup);
-
         } catch (FusionDirectorException e) {
             logger.error(e.getMessage(), e);
             fusionDirector.isOffLineException(e);
@@ -443,5 +450,16 @@ public class NodeCollector implements ResourceCollector<NodeEntity, NodeBean>, R
             logger.error(e.getMessage(), e);
         }
         return nodeBean;
+    }
+
+    private void startCollectThreat(int name) {
+        Thread collectThread = new Thread(this, "NodeCollector" + name);
+        collectThread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread tr, Throwable ex) {
+                logger.error(tr.getName() + " : " + ex.getMessage());
+            }
+        });
+        collectThread.start();
     }
 }

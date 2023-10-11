@@ -229,7 +229,7 @@ public class FusionDirectorServiceImpl implements FusionDirectorService {
 
         for (GroupEntity group : result.getMembers()) {
             AbstractApiWrapper groupApiWrapper = new GroupApiWrapper(fusionDirector);
-            groupApiWrapper.setPathVariable(Collections.singletonList(group.getId()));
+            groupApiWrapper.setPathVariable(Collections.singletonList(String.valueOf(group.getId())));
             try {
                 groupList.add(groupApiWrapper.call(GroupBean.class));
             } catch (FusionDirectorException e) {
