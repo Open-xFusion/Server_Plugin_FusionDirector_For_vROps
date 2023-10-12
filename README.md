@@ -8,7 +8,7 @@ I. General Information
 
     Name:     xFusion_FusionDirector_For_vROps plugin
     Category: Monitoring 
-    version : 2.0.2
+    version : 2.1.0
 
 II. Function Description
     
@@ -21,15 +21,16 @@ II. Function Description
     
 III. Version notice
 
-    1. Compatible with vRealize 8.0/8.1.
-    2. Interconnected with FD 1.6.1.SPC2/1.6.0.SPC1/1.7.0/1.7.1SPC2.
+    1. Compatible with vRealize 8.0/8.1/8.12.
+    2. Interconnected with 1.6.0.SPC1 or later.
     3. Upgraded open-source and third-party software versions.
     4. Security rectification.
 
 IV. Additional Resources
 
-    For more information consult User Guide: 
+    For more information consult User Guide:
+    https://github.com/Open-xFusion/Server_Plugin_FusionDirector_For_vROps/tree/main/docs
 
 V. Open Source Software Notice
 
-    https://github.com
+    https://github.com/Open-xFusion/Server_Plugin_FusionDirector_For_vROps/tree/main/docs

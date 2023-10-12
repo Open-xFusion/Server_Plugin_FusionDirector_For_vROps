@@ -48,7 +48,7 @@ public class Constant {
     /**
      * 收集线程个数
      */
-    public static final int MAX_COLLECT_THREAD_COUNT = 10;
+    public static final int MAX_COLLECT_THREAD_COUNT = 5;
 
     /**
      * 健康状态序列

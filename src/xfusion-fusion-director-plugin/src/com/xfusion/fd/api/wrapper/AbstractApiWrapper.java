@@ -4,6 +4,7 @@
 
 package com.xfusion.fd.api.wrapper;
 
+import com.xfusion.adapter.FusionDirectorAdapter;
 import com.xfusion.fd.api.entity.PaginateEntry;
 import com.xfusion.fd.api.exception.FusionDirectorException;
 import com.xfusion.fd.config.FDEntrypointWhiteList;
@@ -29,10 +30,10 @@ public abstract class AbstractApiWrapper {
     private FusionDirector fusionDirector;
     private Map<String, String> paramMap = new HashMap<>();
     private MultiValueMap<String, String> headers = new HttpHeaders();
-    private Object[] pathVariable;
+    private String[] pathVariable;
 
-    public void setPathVariable(List<?> value) {
-        this.pathVariable = value.toArray(new Object[0]);
+    public void setPathVariable(List<String> value) {
+        this.pathVariable = value.toArray(new String[0]);
     }
 
     public AbstractApiWrapper(FusionDirector fusionDirector) {
@@ -90,22 +91,27 @@ public abstract class AbstractApiWrapper {
      * @throws FusionDirectorException 异常
      */
     public <V, T> List<V> callList(Class<T> responseType) throws FusionDirectorException {
-        List<V> resutList = new ArrayList<>();
+        List<V> resultList = new ArrayList<>();
         int pageSize = 50;
         int start = 0;
         paramMap.put("$top", pageSize + "");
         while (true) {
             paramMap.put("$skip", "" + (start * pageSize));
-            T result = call(responseType);
-            if (result instanceof PaginateEntry) {
-                PaginateEntry<V> page = (PaginateEntry<V>) result;
-                if (page.hasMoreEntry() == false) {
-                    break;
+            try {
+                T result = call(responseType);
+                if (result instanceof PaginateEntry) {
+                    PaginateEntry<V> page = (PaginateEntry<V>) result;
+                    if (!page.hasMoreEntry()) {
+                        break;
+                    }
+                    resultList.addAll(page.getMembers());
                 }
-                resutList.addAll(page.getMembers());
+            } catch (Exception e) {
+                FusionDirectorAdapter.getLogger().error("callList failed, requestURL:" + getRequestURL(), e);
+                break;
             }
             start++;
         }
-        return resutList;
+        return resultList;
     }
 }

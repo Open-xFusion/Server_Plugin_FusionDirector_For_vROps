@@ -18,7 +18,7 @@ def isHaveSpecialWords(strContent):
 
 
 ##### Import dashboards #####
-if sys.platform.startswith('linux') == True:
+if sys.platform.startswith('linux'):
     logging.info("This is Linux")
 
     cmd = "pushd $VCOPS_BASE/tools/opscli"
@@ -51,12 +51,11 @@ if sys.platform.startswith('linux') == True:
 
     logging.info("Completed Execution for Linux")
 
-if sys.platform.startswith('win') == True:
+if sys.platform.startswith('win'):
     logging.info("This is Windows")
 
     vcopsbase = os.getenv('VCOPS_BASE')
     vpythonbin = os.getenv('VMWARE_PYTHON_BIN')
-    logging.info(vpythonbin)
     vcopsclipath = vcopsbase + "\\tools\\opscli\\"
     cmd = "pushd " + vcopsclipath
     os.system(cmd)

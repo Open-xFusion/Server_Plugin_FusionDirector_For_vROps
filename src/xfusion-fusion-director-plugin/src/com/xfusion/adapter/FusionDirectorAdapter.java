@@ -58,7 +58,8 @@ import java.util.Map;
  * @since 2019-02-18
  */
 public class FusionDirectorAdapter extends AdapterBase {
-    private final Logger logger;
+    private static Logger logger = null;
+
     private FusionDirectorAdapterUtil adapterUtil;
     private Map<ResourceKey, List<MetricData>> metricsByResource = new LinkedHashMap<>();
     private Map<ResourceKey, List<ResourceKey>> relationshipsByResource = new LinkedHashMap<>();
@@ -93,6 +94,15 @@ public class FusionDirectorAdapter extends AdapterBase {
     public AdapterDescribe onDescribe() {
         logger.info("Inside onDescribe method of FusionDirectorAdapter class");
         return adapterUtil.createAdapterDescribe();
+    }
+
+    /**
+     * 获取Adapter Logger
+     *
+     * @return Logger
+     */
+    public static Logger getLogger() {
+        return logger;
     }
 
     /**
@@ -587,7 +597,7 @@ public class FusionDirectorAdapter extends AdapterBase {
             AbstractApiWrapper wrapper = new NodeListApiWrapper(fd);
             wrapper.call(String.class);
             if (logger.isInfoEnabled()) {
-                logger.error("Test connection to FusionDirector successfuly.");
+                logger.error("Test connection to FusionDirector successfully.");
             }
             return true;
         } catch (FusionDirectorException | FileNotFoundException e) {

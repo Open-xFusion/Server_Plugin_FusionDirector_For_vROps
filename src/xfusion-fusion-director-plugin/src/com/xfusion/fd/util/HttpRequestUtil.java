@@ -4,12 +4,14 @@
 
 package com.xfusion.fd.util;
 
+import com.xfusion.adapter.FusionDirectorAdapter;
 import com.xfusion.fd.api.exception.FusionDirectorException;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.xfusion.fd.config.CustomRestTemplateResponseErrorHandler;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,6 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -85,7 +86,7 @@ public class HttpRequestUtil {
         }
 
         restTemplate = new RestTemplate(factory);
-
+        restTemplate.setErrorHandler(new CustomRestTemplateResponseErrorHandler());
         List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
 
         list.add(new StringHttpMessageConverter());
@@ -96,19 +97,20 @@ public class HttpRequestUtil {
         try {
             ResponseEntity<String> responseEntity = restTemplate.exchange(url, method, requestEntity, String.class);
 
-            if (responseEntity == null) {
-                throw new FusionDirectorException("Fusion director found error");
+            int tryTimes = 0;
+            while (responseEntity.getStatusCode().value() == 429 && tryTimes < 100) {
+                tryTimes++;
+                Thread.sleep(1000);
+                responseEntity = restTemplate.exchange(url, method, requestEntity, String.class);
             }
 
             if (responseEntity.getStatusCode().value() > 400 && responseEntity.getStatusCode().value() <= 600) {
-                throw new FusionDirectorException("Fusion director error: " + responseEntity.getStatusCode().name());
+                throw new FusionDirectorException("FusionDirector error: " + responseEntity.getStatusCode().name());
             }
-
             return json2Object(responseEntity.getBody(), responseType);
-        } catch (HttpServerErrorException e) {
-            throw new FusionDirectorException("Fusion director error: " + e.getMessage() + ", with url = " + url);
         } catch (Exception e) {
-            throw new FusionDirectorException("Fusion director error: " + e.getMessage() + ", with url = " + url);
+            FusionDirectorAdapter.getLogger().error("requestWithBody:" + e.getMessage() + ", with url = " + url, e);
+            throw new FusionDirectorException("FusionDirector error: " + e.getMessage() + ", with url = " + url);
         }
     }
 
@@ -138,13 +140,15 @@ public class HttpRequestUtil {
         try {
             return objectMapper.readValue(jsonString.getBytes("UTF-8"), returnType);
         } catch (JsonParseException e) {
+            FusionDirectorAdapter.getLogger().error("JsonParseException:", e);
             throw new FusionDirectorException(
                     "JsonParseException: " + returnType.getCanonicalName() + " from " + jsonString);
-
         } catch (JsonMappingException e) {
+            FusionDirectorAdapter.getLogger().error("JsonMappingException:", e);
             throw new FusionDirectorException(
                     "JsonMappingException: " + returnType.getCanonicalName() + " from " + jsonString);
         } catch (IOException e) {
+            FusionDirectorAdapter.getLogger().error("IOException:", e);
             throw new FusionDirectorException("IOException: " + returnType.getCanonicalName() + " from " + jsonString);
         }
     }
