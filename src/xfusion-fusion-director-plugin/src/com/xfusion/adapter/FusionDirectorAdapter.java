@@ -2,28 +2,28 @@
  * Copyright (c) xFusion Digital Technologies Co., Ltd. 2019-2021. All rights reserved.
  */
 
-package com.xfusion.adapter;
+package vrops.adapter;
 
-import com.xfusion.adapter.bean.Constant;
-import com.xfusion.adapter.bean.ResourceKeyCache;
-import com.xfusion.adapter.util.FusionDirectorAdapterUtil;
-import com.xfusion.fd.api.exception.FusionDirectorException;
-import com.xfusion.fd.api.wrapper.AbstractApiWrapper;
-import com.xfusion.fd.api.wrapper.NodeListApiWrapper;
-import com.xfusion.fd.service.FusionDirectorService;
-import com.xfusion.fd.service.FusionDirectorServiceImpl;
-import com.xfusion.fd.service.bean.EnclosureBean;
-import com.xfusion.fd.service.bean.EnclosureFanBean;
-import com.xfusion.fd.service.bean.EnclosureManagerBean;
-import com.xfusion.fd.service.bean.EnclosurePowerBean;
-import com.xfusion.fd.service.bean.FusionDirector;
-import com.xfusion.fd.service.bean.GroupResourceBean;
-import com.xfusion.fd.service.bean.NodeBean;
-import com.xfusion.fd.service.bean.SlotBean;
-import com.xfusion.fd.service.bean.SwitchNodeBean;
-import com.xfusion.fd.service.bean.TreeNodeResource;
-import com.xfusion.fd.util.HealthToolkit;
-import com.xfusion.fd.util.StaticToolkit;
+import vrops.adapter.bean.Constant;
+import vrops.adapter.bean.ResourceKeyCache;
+import vrops.adapter.util.FusionDirectorAdapterUtil;
+import vrops.fd.api.exception.FusionDirectorException;
+import vrops.fd.api.wrapper.AbstractApiWrapper;
+import vrops.fd.api.wrapper.NodeListApiWrapper;
+import vrops.fd.service.FusionDirectorService;
+import vrops.fd.service.FusionDirectorServiceImpl;
+import vrops.fd.service.bean.EnclosureBean;
+import vrops.fd.service.bean.EnclosureFanBean;
+import vrops.fd.service.bean.EnclosureManagerBean;
+import vrops.fd.service.bean.EnclosurePowerBean;
+import vrops.fd.service.bean.FusionDirector;
+import vrops.fd.service.bean.GroupResourceBean;
+import vrops.fd.service.bean.NodeBean;
+import vrops.fd.service.bean.SlotBean;
+import vrops.fd.service.bean.SwitchNodeBean;
+import vrops.fd.service.bean.TreeNodeResource;
+import vrops.fd.util.HealthToolkit;
+import vrops.fd.util.StaticToolkit;
 
 import com.integrien.alive.common.adapter3.AdapterBase;
 import com.integrien.alive.common.adapter3.DiscoveryParam;
@@ -141,13 +141,13 @@ public class FusionDirectorAdapter extends AdapterBase {
             logger.info("Inside onCollect method of FusionDirectorAdapter class");
         }
 
-        logger.error("FusionDirector Adapter home dir is: " + FusionDirectorAdapterUtil.getAdapterFolder());
+        logger.info("FusionDirector Adapter home dir is: " + FusionDirectorAdapterUtil.getAdapterFolder());
         final IdentifierCredentialProperties prop =
                 new IdentifierCredentialProperties(adapterLoggerFactory, adapterInstResource);
         FusionDirector fusionDirector = getConnection(prop);
         ResourceKeyCache.resetExistFlag(fusionDirector.getPrefix());
         service = new FusionDirectorServiceImpl(fusionDirector, logger);
-        logger.error("FusionDirector state is: " + fusionDirector.getState());
+        logger.info("FusionDirector state is: " + fusionDirector.getState());
         List<ResourceKey> resources = collectResourceData(fusionDirector);
         setMetricData(adapterInstResource, fusionDirector);
 
@@ -160,7 +160,7 @@ public class FusionDirectorAdapter extends AdapterBase {
         if (resources.isEmpty()) {
             logger.error("No resources collected from server with IP " + fusionDirector.getHost());
         } else {
-            logger.error(resources.size() + " resources collected from server with IP " + fusionDirector.getHost());
+            logger.info(resources.size() + " resources collected from server with IP " + fusionDirector.getHost());
         }
 
         if ("offline".equals(fusionDirector.getState())) {
@@ -168,14 +168,14 @@ public class FusionDirectorAdapter extends AdapterBase {
         }
 
         List<ResourceKey> removedKeys = ResourceKeyCache.getRemovedKeys(fusionDirector.getPrefix());
-        logger.error("Count of resource removed is: " + removedKeys.size());
+        logger.info("Count of resource removed is: " + removedKeys.size());
         for (ResourceKey resourceKey : removedKeys) {
             ResourceConfig resourceConfig = getMonitoringResource(resourceKey);
             if (resourceConfig == null) {
                 continue;
             }
             changeResourceState(resourceConfig, StateChangeEnum.NOTEXIST);
-            logger.error("Removed resouce with label = " + resourceKey.getResourceName());
+            logger.info("Removed resouce with label = " + resourceKey.getResourceName());
         }
 
         for (ResourceKey resourceKey : resources) {
@@ -228,7 +228,7 @@ public class FusionDirectorAdapter extends AdapterBase {
      * @return collected resources
      */
     private List<ResourceKey> collectResourceData(FusionDirector fusionDirector) {
-        logger.error("classify method is:" + fusionDirector.getClassifyMethod());
+        logger.info("classify method is:" + fusionDirector.getClassifyMethod());
         List<ResourceKey> allKeysList = new ArrayList<>();
         // 1.2.1 FusionDirector (server)
         fusionDirector.setResourceName("hostInstance");
@@ -244,8 +244,6 @@ public class FusionDirectorAdapter extends AdapterBase {
     }
 
     private void collectEnclosure(FusionDirector fusionDirector, List<ResourceKey> allKeysList) {
-        String idPrefix = fusionDirector.getHost() + fusionDirector.getPort();
-        List<ResourceKey> enclosureFDChildKeys = new ArrayList<>();
         FusionDirector fusionDirectorEnclosure =
                 new FusionDirector(
                         fusionDirector.getHost(), fusionDirector.getPort(),
@@ -254,16 +252,15 @@ public class FusionDirectorAdapter extends AdapterBase {
 
         fusionDirectorEnclosure.setState(fusionDirector.getState());
         HealthToolkit fusionDirectorEnclosureHealthToolkit = new HealthToolkit();
-
         if ("offline".equals(fusionDirectorEnclosure.getState())) {
             fusionDirectorEnclosureHealthToolkit.pushHealth("Unknown");
         }
         fusionDirectorEnclosure.setResourceName("enclosureInstance");
-
+        String idPrefix = fusionDirector.getHost() + fusionDirector.getPort();
         // switch node
         Map<String, ResourceKey> switchNodeResourceKeyMap = collectEnclSwitchNode(allKeysList, idPrefix);
-
         // enclosure
+        List<ResourceKey> enclosureFDChildKeys = new ArrayList<>();
         List<EnclosureBean> enclosureList = service.getAllEnclosure();
         for (EnclosureBean enclosure : enclosureList) {
             final String enclPrefix = idPrefix + enclosure.getDeviceID();
@@ -286,7 +283,7 @@ public class FusionDirectorAdapter extends AdapterBase {
             relationshipsByResource.put(enclResourceKey, encosureChildList);
         }
 
-        logger.error(enclosureList.size() + " enclosures created.");
+        logger.info(enclosureList.size() + " enclosures created.");
         fusionDirectorEnclosure.setHealth(fusionDirectorEnclosureHealthToolkit.getHealth());
         ResourceKey enclosureFDKey =
                 fusionDirectorEnclosure.convert2Resource(idPrefix + "enclosure", getAdapterKind(), metricsByResource);
@@ -303,7 +300,7 @@ public class FusionDirectorAdapter extends AdapterBase {
             allKeysList.add(resourceKey);
             switchNodeResourceKeyMap.put(switchNode.getDeviceID(), resourceKey);
         }
-        logger.error(switchNodeList.size() + " switch nodes created.");
+        logger.info(switchNodeList.size() + " switch nodes created.");
         return switchNodeResourceKeyMap;
     }
 
@@ -334,8 +331,8 @@ public class FusionDirectorAdapter extends AdapterBase {
         GroupResourceBean fanSlot = new GroupResourceBean("fanSlot", "Fan Group");
         String fanGroupHealthStatus = "OK";
         for (EnclosureFanBean fan : enclosure.getFans()) {
-            if (Constant.HEALTH_STATUS_ORDER.get(fan.getHealth()) >
-                    Constant.HEALTH_STATUS_ORDER.get(fanGroupHealthStatus)) {
+            if (Constant.HEALTH_STATUS_ORDER.get(fan.getHealth())
+                    > Constant.HEALTH_STATUS_ORDER.get(fanGroupHealthStatus)) {
                 fanGroupHealthStatus = fan.getHealth();
             }
         }
@@ -383,9 +380,7 @@ public class FusionDirectorAdapter extends AdapterBase {
             String enclPrefix,
             List<ResourceKey> encosureChildList) {
         List<ResourceKey> allKeysList = new ArrayList<>();
-        GroupResourceBean switchSlot = new GroupResourceBean("switchSlot", "Switch Group");
         HealthToolkit switchSlotHealthToolkit = new HealthToolkit();
-
         List<ResourceKey> switchSlotChildList = new ArrayList<>();
         for (SlotBean slot : enclosure.getSwitchSlots()) {
             ResourceKey key = switchNodeResourceKeyMap.get(slot.getDeviceID());
@@ -402,7 +397,7 @@ public class FusionDirectorAdapter extends AdapterBase {
                 switchSlotHealthToolkit.pushHealth(service.getSwitchNodeHealth(slot.getDeviceID()));
             }
         }
-
+        GroupResourceBean switchSlot = new GroupResourceBean("switchSlot", "Switch Group");
         switchSlot.setHealthStatus(switchSlotHealthToolkit.getHealth());
         enclosure.setSwitchHealth(switchSlot.getHealthStatus());
         ResourceKey switchSlotKey = switchSlot.convert2Resource(enclPrefix, getAdapterKind(), metricsByResource);
@@ -417,7 +412,6 @@ public class FusionDirectorAdapter extends AdapterBase {
             EnclosureBean enclosure,
             String enclPrefix,
             List<ResourceKey> encosureChildList) {
-        GroupResourceBean serverSlot = new GroupResourceBean("serverSlot", "Blade Group");
         List<ResourceKey> serverSlotChildList = new ArrayList<>();
         HealthToolkit serverSlotHealthToolkit = new HealthToolkit();
         for (SlotBean slot : enclosure.getServerSlots()) {
@@ -426,8 +420,6 @@ public class FusionDirectorAdapter extends AdapterBase {
                 continue;
             }
             bladeNode.setSlotBean(slot);
-            ResourceKey bladeNodeResourceKey =
-                    bladeNode.convert2Resource(enclPrefix, getAdapterKind(), metricsByResource);
             List<ResourceKey> bladeNodeChildKeyList = new ArrayList<>();
             // group
             for (TreeNodeResource groupResource : bladeNode.getChildren()) {
@@ -449,11 +441,14 @@ public class FusionDirectorAdapter extends AdapterBase {
                 relationshipsByResource.put(resourceKey, beanResourceKeyList);
                 bladeNodeChildKeyList.add(resourceKey);
             }
+            ResourceKey bladeNodeResourceKey =
+                    bladeNode.convert2Resource(enclPrefix, getAdapterKind(), metricsByResource);
             relationshipsByResource.put(bladeNodeResourceKey, bladeNodeChildKeyList);
             allKeysList.add(bladeNodeResourceKey);
             serverSlotChildList.add(bladeNodeResourceKey);
             serverSlotHealthToolkit.pushHealth(service.getNodeHealth(slot.getDeviceID()));
         }
+        GroupResourceBean serverSlot = new GroupResourceBean("serverSlot", "Blade Group");
         serverSlot.setHealthStatus(serverSlotHealthToolkit.getHealth());
         enclosure.setServerHealth(serverSlot.getHealthStatus());
         ResourceKey serverSlotKey = serverSlot.convert2Resource(enclPrefix, getAdapterKind(), metricsByResource);
@@ -492,7 +487,7 @@ public class FusionDirectorAdapter extends AdapterBase {
                 classifyChildKeys.add(nodeResourceKeyMap.get(deviceId));
             }
 
-            logger.error(classifyGroup.getResourceLabel() + " link to node size: " + classifyChildKeys.size());
+            logger.info(classifyGroup.getResourceLabel() + " link to node size: " + classifyChildKeys.size());
             relationshipsByResource.put(classifyGroupKey, classifyChildKeys);
             allKeysList.add(classifyGroupKey);
             serverFDChildKeys.add(classifyGroupKey);
@@ -503,7 +498,7 @@ public class FusionDirectorAdapter extends AdapterBase {
                 fusionDirector.convert2Resource(idPrefix + "server", getAdapterKind(), metricsByResource);
         allKeysList.add(serverFDKey);
 
-        logger.error(service.getClassifyGroup().size() + " classify group created.");
+        logger.info(service.getClassifyGroup().size() + " classify group created.");
         relationshipsByResource.put(serverFDKey, serverFDChildKeys);
     }
 
@@ -552,7 +547,7 @@ public class FusionDirectorAdapter extends AdapterBase {
             relationshipsByResource.put(nodeResourceKey, nodeChildKeyList);
             nodeResourceKeyMap.put(node.getDeviceID(), nodeResourceKey);
         }
-        logger.error(list.size() + " nodes created.");
+        logger.info(list.size() + " nodes created.");
     }
 
     /**
@@ -613,7 +608,7 @@ public class FusionDirectorAdapter extends AdapterBase {
         try {
             url = new URL(urlStr);
         } catch (MalformedURLException err) {
-            logger.error("invalid url");
+            logger.error("invalid url", err);
             return false;
         }
         return !url.getHost().equalsIgnoreCase("localhost") && !url.getHost().equalsIgnoreCase("127.0.0.1");

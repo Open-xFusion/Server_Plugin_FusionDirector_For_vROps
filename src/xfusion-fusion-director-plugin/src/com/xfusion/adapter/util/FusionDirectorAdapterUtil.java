@@ -2,7 +2,7 @@
  * Copyright (c) xFusion Digital Technologies Co., Ltd. 2019-2021. All rights reserved.
  */
 
-package com.xfusion.adapter.util;
+package vrops.adapter.util;
 
 import com.integrien.alive.common.adapter3.Logger;
 import com.integrien.alive.common.adapter3.describe.AdapterDescribe;
@@ -35,7 +35,7 @@ public class FusionDirectorAdapterUtil {
         if (adapterDescribe == null) {
             logger.error("Unable to load adapter describe");
         } else {
-            logger.debug("Successfully loaded adapter");
+            logger.info("Successfully loaded adapter");
         }
         return adapterDescribe;
     }

@@ -2,9 +2,9 @@
  * Copyright (c) xFusion Digital Technologies Co., Ltd. 2019-2021. All rights reserved.
  */
 
-package com.xfusion.adapter.bean;
+package vrops.adapter.bean;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -17,34 +17,42 @@ public class Constant {
      * 服务器IP
      */
     public static final String KEY_SERVER_IP_ADDRESS = "serverIP";
+
     /**
      * 服务器地址
      */
     public static final String KEY_SERVER_PORT = "serverPort";
+
     /**
      * 用户名
      */
     public static final String KEY_FD_ACCOUNT = "username";
+
     /**
      * FusionDirector 编码
      */
     public static final String KEY_FD_CODE = "fdCode";
+
     /**
      * 设备分类方式
      */
     public static final String KEY_CLASSIFY_METHOD = "deviceClassificationMethod";
+
     /**
      * 分组类型
      */
     public static final String CLASSIFY_BY_GROUP = "Group Type";
+
     /**
      * 型号类型
      */
     public static final String CLASSIFY_BY_MODEL = "Model Type";
+
     /**
      * 证书地址
      */
     public static final String SSL_CERT_PATH = "sslCertPath";
+
     /**
      * 收集线程个数
      */
@@ -53,7 +61,7 @@ public class Constant {
     /**
      * 健康状态序列
      */
-    public static final Map<String, Integer> HEALTH_STATUS_ORDER = new HashMap<>();
+    public static final Map<String, Integer> HEALTH_STATUS_ORDER = Collections.emptyMap();
 
     static {
         HEALTH_STATUS_ORDER.put("Unknown", -1);

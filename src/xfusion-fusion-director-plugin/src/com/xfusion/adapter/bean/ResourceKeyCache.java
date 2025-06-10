@@ -2,7 +2,7 @@
  * Copyright (c) xFusion Digital Technologies Co., Ltd. 2019-2021. All rights reserved.
  */
 
-package com.xfusion.adapter.bean;
+package vrops.adapter.bean;
 
 import com.integrien.alive.common.adapter3.ResourceKey;
 import com.integrien.alive.common.adapter3.config.ResourceIdentifierConfig;
