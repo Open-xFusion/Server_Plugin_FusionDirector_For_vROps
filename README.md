@@ -8,7 +8,7 @@ I. General Information
 
     Name:     xFusion_FusionDirector_For_vROps plugin
     Category: Monitoring 
-    version : 2.1.0
+    version : 2.8.0
 
 II. Function Description
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modulelist>
-	<module name="xfusion-fusion-director-management-pack">
-		<filepath>/src/xfusion-fusion-director-management-pack</filepath>
+	<module name="fusionDirector-management-pack">
+		<filepath>/src/fusionDirector-management-pack</filepath>
 		<owner>cwx507252</owner>
 	</module>
-	<module name="xfusion-fusion-director-plugin">
-		<filepath>/src/xfusion-fusion-director-plugin</filepath>
+	<module name="fusionDirector-plugin">
+		<filepath>/src/fusionDirector-plugin</filepath>
 		<owner>cwx507252</owner>
 	</module>
 </modulelist>

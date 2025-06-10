@@ -22,12 +22,12 @@
 
   <target name="path.setting.windows" depends="checkos" if="isWindows">
     <propertyregex property="root.dir" input="${base.dir}" regexp="\\" replace="/" />
-    <propertyregex property="plugin.dir" input="${base.dir}/src/xfusion-fusion-director-plugin" regexp="\\" replace="/" />
+    <propertyregex property="plugin.dir" input="${base.dir}/src/fusionDirector-plugin" regexp="\\" replace="/" />
   </target>
 
   <target name="path.setting.UNIX" depends="checkos" if="isLinux">
     <property name="root.dir" value="${base.dir}" />
-    <property name="plugin.dir" value="${base.dir}/src/xfusion-fusion-director-plugin" />
+    <property name="plugin.dir" value="${base.dir}/src/fusionDirector-plugin" />
   </target>
   
   
@@ -37,25 +37,25 @@
 
     <echo message="plugin.dir = ${plugin.dir}"/>
 
-    <echo message="Patch file src/xfusion-fusion-director-management-pack/solution.xml"/>
-    <replaceregexp file="${base.dir}/src/xfusion-fusion-director-management-pack/solution.xml"
+    <echo message="Patch file src/fusionDirector-management-pack/solution.xml"/>
+    <replaceregexp file="${base.dir}/src/fusionDirector-management-pack/solution.xml"
                    byline="true"
                    match="\&lt;adapter\&gt;.*\&lt;\/adapter\&gt;" 
                    replace="\&lt;adapter\&gt;${plugin.dir}\&lt;/adapter\&gt;" />
     
-    <echo message="Patch file src/xfusion-fusion-director-management-pack/.project"/>
-    <replaceregexp file="${base.dir}/src/xfusion-fusion-director-management-pack/.project"
+    <echo message="Patch file src/fusionDirector-management-pack/.project"/>
+    <replaceregexp file="${base.dir}/src/fusionDirector-management-pack/.project"
                    byline="true"
                    match="\&lt;location\&gt;.*\&lt;\/location\&gt;" 
                    replace="\&lt;location\&gt;${plugin.dir}\&lt;/location\&gt;" />  
     
-    <echo message="Patch file src/xfusion-fusion-director-plugin/.project"/>
+    <echo message="Patch file src/fusionDirector-plugin/.project"/>
     <replaceregexp file="${plugin.dir}/.project" 
                    byline="true"
                    match="\&lt;location\&gt;.*test/test-src\&lt;\/location\&gt;" 
                    replace="\&lt;location\&gt;${root.dir}/test/test-src\&lt;/location\&gt;" />    
     
-    <echo message="Patch file src/xfusion-fusion-director-plugin/.classpath"/>
+    <echo message="Patch file src/fusionDirector-plugin/.classpath"/>
     <replaceregexp file="${plugin.dir}/.classpath" 
                    byline="true"
                    match='path=".*third_party' 
@@ -65,17 +65,17 @@
                    match='path=".*src_bin' 
                    replace='path="${root.dir}/src_bin' />        
 				   
-	<echo message="Patch file src/xfusion-fusion-director-plugin/adapter.xml"/>
+	<echo message="Patch file src/fusionDirector-plugin/adapter.xml"/>
     <replaceregexp file="${plugin.dir}/adapter.xml" 
                    byline="true"
                    match='\&lt;parent\&gt;.*\&lt;/parent\&gt;' 
-                   replace='\&lt;parent\&gt;${root.dir}/src/xfusion-fusion-director-management-pack\&lt;/parent\&gt;' />
+                   replace='\&lt;parent\&gt;${root.dir}/src/fusionDirector-management-pack\&lt;/parent\&gt;' />
       
   </target>
   
   <target name="all" depends="init">
-    <ant inheritAll="false" antfile="${base.dir}/src/xfusion-fusion-director-plugin/build.xml" target="all" />
-    <ant inheritAll="false" antfile="${base.dir}/src/xfusion-fusion-director-management-pack/build.xml" target="all" />
+    <ant inheritAll="false" antfile="${base.dir}/src/fusionDirector-plugin/build.xml" target="all" />
+    <ant inheritAll="false" antfile="${base.dir}/src/fusionDirector-management-pack/build.xml" target="all" />
     <echo message="DONE!"/>    
   </target> 
   
