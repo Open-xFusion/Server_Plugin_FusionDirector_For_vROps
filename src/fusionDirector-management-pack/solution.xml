@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<solution>
+<managementPack>
+<name>XFUSIONDirectorManagementPack</name>
+<version>2.9.10</version>
+<minimumProductVersion>8.0.0</minimumProductVersion>
+<localizations lang="en">
+<localization lang="en">
+<displayName>XFUSION FusionDirector Management Pack</displayName>
+<description>XFUSION FusionDirector Management Pack for VMware vRealize Operations</description>
+<vendor>XFUSION</vendor>
+</localization>
+<localization lang="en-US">
+<displayName>XFUSION FusionDirector Management Pack for VMware vRealize Operations</displayName>
+<description>XFUSION FusionDirector Management Pack</description>
+<vendor>XFUSION</vendor>
+</localization>
+</localizations>
+<eula>eula.txt</eula>
+<image>pak_icon.png</image>
+<platforms>
+<platform>Linux VA</platform>
+</platforms>
+<adapters>
+<adapter>D:/project/FusionDirector/mosai_gitlab/fd-vrealize-plugin/src/fusionDirector-plugin</adapter>
+</adapters>
+<scripts runScriptsOnAllNodes="false">
+<pre>pre_adapters.py</pre>
+<post>post_adapters.py</post>
+<validation>validate.py</validation>
+</scripts>
+</managementPack>
+</solution>
