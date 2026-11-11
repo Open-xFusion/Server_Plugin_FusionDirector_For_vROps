@@ -21,7 +21,7 @@ II. Function Description
     
 III. Version notice
 
-    1. Compatible with vRealize 8.0/8.1/8.12.
+    1. Compatible with vRealize 8.0/8.1/8.12/8.14/8.16/8.18/VCF9.0.
     2. Interconnected with 1.6.0.SPC1 or later.
     3. Upgraded open-source and third-party software versions.
     4. Security rectification.
